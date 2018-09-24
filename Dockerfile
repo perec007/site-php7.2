@@ -7,7 +7,6 @@ apt-get install -y wget nginx supervisor libapache2-mod-rpaf sudo git mc net-too
         libfreetype6-dev \
         libjpeg62-turbo-dev \
         libmcrypt-dev \
-        libpng12-dev \
         libxml2 \
         libxml2-dev \
         libcurl4-openssl-dev \
@@ -32,12 +31,12 @@ ENV PHANTOMJS phantomjs-2.1.1-linux-x86_64
 RUN apt-get update \
     && apt-get install -y --no-install-recommends \
         libmcrypt-dev zlib1g-dev git libgmp-dev \
-        libfreetype6-dev libjpeg62-turbo-dev libpng12-dev \
+        libfreetype6-dev libjpeg62-turbo-dev \
         build-essential chrpath libssl-dev libxft-dev \
         libfreetype6 libfontconfig1 libfontconfig1-dev \
     && ln -s /usr/include/x86_64-linux-gnu/gmp.h /usr/local/include/ \
     && docker-php-ext-configure gmp \
-    && docker-php-ext-install iconv mcrypt mbstring pdo pdo_mysql zip gd gmp opcache \
+    && docker-php-ext-install iconv mbstring pdo pdo_mysql zip gd gmp opcache \
     && curl -o ${PHANTOMJS}.tar.bz2 -SL https://bitbucket.org/ariya/phantomjs/downloads/${PHANTOMJS}.tar.bz2 \
     && tar xvjf ${PHANTOMJS}.tar.bz2 \
     && rm ${PHANTOMJS}.tar.bz2 \
@@ -52,7 +51,7 @@ ENV PHANTOMJS_BIN_PATH /usr/local/bin/phantomjs
 
 
 
-RUN docker-php-ext-install iconv mcrypt 
+RUN docker-php-ext-install iconv 
 RUN docker-php-ext-install bcmath ctype curl dom gettext hash iconv json mbstring mysqli opcache posix pspell  session shmop simplexml  soap sockets tidy tokenizer wddx xsl zip pdo pdo_mysql xml  xmlrpc xmlwriter exif intl
 
 
@@ -105,7 +104,6 @@ RUN chown 33:33 /var/www/
 RUN apt-get remove -y gcc make libjpeg-dev libpng-dev libtiff-dev libvpx-dev libxpm-dev libfontconfig1-dev libxpm-dev checkinstall  libfreetype6-dev \
         libjpeg62-turbo-dev \
         libmcrypt-dev \
-        libpng12-dev \
         libxml2-dev \
         libcurl4-openssl-dev \
         libpspell-dev \
